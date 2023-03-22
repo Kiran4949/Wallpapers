@@ -1,0 +1,20 @@
+{% extends 'base.html' %} 
+
+{% block title %} Wallpaper Detail | {% endblock title %} 
+
+{% block body %}
+
+<div class="container my-5">
+  <div class="row">
+    <div class="col-sm-6 text-center align-self-center w-50, h-50">
+      <img src="{{wallpaper.wallpaper_image.url}}" alt="" class="img-fluid img-thumbnail" />
+    </div>
+    <div class="col-sm-5 offset-sm-1">
+      <h2>Title: {{wallpaper.title}}</h2>
+      <hr />
+      <a href="{{wallpaper.wallpaper_image.url}}" class="btn btn-danger shadow px-5 py-2 ms-4" download>Download</a>
+    </div>
+  </div>
+</div>
+
+{% endblock body %}

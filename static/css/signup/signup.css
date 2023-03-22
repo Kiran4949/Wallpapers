@@ -1,0 +1,91 @@
+body,
+html {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+    background: white;
+}
+img{
+	width: 85px; 
+	height: 85px; 
+	margin-left: 45%; 
+	margin-top: 70px; 
+	translate: transform(-50, -50);
+}
+h5{
+	color: black; 
+	margin-left: 42%;
+}
+.user_card {
+	width: 350px;
+	margin-top: 20px;
+	margin-bottom: auto;
+	background: #74cfbf;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	padding: 10px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	-webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	-moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	border-radius: 5px;
+
+}
+.user_card .logo{
+	justify-content: center;
+	width: 100px;
+}
+
+.form_container {
+	margin-top: 20px;
+}
+
+.login_btn {
+	width: 100%;
+	background: #0e7699 !important;
+	color: white !important;
+}
+
+.login_btn:focus {
+	box-shadow: none !important;
+	outline: 0px !important;
+}
+
+.login_container {
+	padding: 0 2rem;
+}
+
+.input-group-text {
+	background: #f7ba5b !important;
+	color: white !important;
+	border: 0 !important;
+	border-radius: 0.25rem 0 0 0.25rem !important;
+}
+
+.input_user,
+.input_pass:focus {
+	box-shadow: none !important;
+	outline: 0px !important;
+}
+
+#messages{
+	background-color: grey;
+	color: #fff;
+	padding: 10px;
+	margin-top: 10px;
+}
+
+@media screen and (max-width: 768px) {
+	img {
+		width: 65px;
+		height: 65px;
+		margin-left: 38%;
+		translate: transform(-50, -50);
+	}
+	
+	h5 {
+		color: black;
+		margin-left: 22%;
+	}
+}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %} 
+
+{% block title %} Taj-Mahal | {% endblock title %} 
+
+{% block body %}
+
+<div class="container mt-5">
+  <div class="row">
+    {% for t in tajmahals %}
+    <div class="col-sm-4">
+      <div class="card mt-3 w-100">
+        <a href="{% url 'wallpaper-detail' t.id %}" class="btn">
+          <img src="{{t.wallpaper_image.url}}" class="card-img-top w-100 m-0" height="300px" />
+        </a>
+        <div class="card-footer">
+          <small class="text-center"><a href=" {{t.wallpaper_image.url}} " class="btn" download> Download </a></small>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock body %}

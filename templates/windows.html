@@ -1,0 +1,24 @@
+{% extends 'base.html' %} 
+
+{% block title %} Windows | {% endblock title %} 
+
+{% block body %}
+
+<div class="container mt-5">
+  <div class="row">
+    {% for w in windows %}
+    <div class="col-sm-4">
+      <div class="card mt-3 w-100">
+        <a href="{% url 'wallpaper-detail' w.id %}" class="btn">
+          <img src="{{w.wallpaper_image.url}}" class="card-img-top w-100 m-0" height="300px" />
+        </a>
+        <div class="card-footer">
+          <small class="text-center"><a href=" {{w.wallpaper_image.url}} " class="btn" download> Download </a></small>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock body %}

@@ -1,0 +1,198 @@
+{% extends 'base.html' %} 
+
+{% block title %} {% endblock title %} 
+
+{% block body %}
+
+<div class="container mt-3 mb-5">
+  <form action="/search">
+    <div class="input-group">
+      <input type="text" class="form-control" placeholder="Search" name="search" />
+      <div class="input-group-btn">
+        <button type="submit" class="btn btn-default"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </div>
+    </div>
+  </form>
+</div>
+
+{% if request.user.is_authenticated %} 
+{% else %}
+<div class="slideshow-container">
+  <div class="mySlides1">
+    <img src="static/images/banner/snow-wide.jpg" style="width: 100%" />
+  </div>
+
+  <div class="mySlides1">
+    <img src="static/images/banner/mountains-wide.jpg" style="width: 100%" />
+  </div>
+
+  <div class="mySlides1">
+    <img src="static/images/banner/nature-wide.jpg" style="width: 100%" />
+  </div>
+  {% endif %}
+  <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
+</div>
+
+<script>
+  let slideIndex = [1, 1];
+  let slideId = ["mySlides1", "mySlides2"];
+  showSlides(1, 0);
+  showSlides(1, 1);
+
+  function plusSlides(n, no) {
+    showSlides((slideIndex[no] += n), no);
+  }
+
+  function showSlides(n, no) {
+    let i;
+    let x = document.getElementsByClassName(slideId[no]);
+    if (n > x.length) {
+      slideIndex[no] = 1;
+    }
+    if (n < 1) {
+      slideIndex[no] = x.length;
+    }
+    for (i = 0; i < x.length; i++) {
+      x[i].style.display = "none";
+    }
+    x[slideIndex[no] - 1].style.display = "block";
+  }
+</script>
+
+<p style="text-align: center; font-family: sans; font-size: 25px; font-weight: 300; color: blue; margin: 20px 0 0 0">Download your favourite WALLPAPERs for your Desktop, Tablet and Mobile.</p>
+
+<br />
+<div class="album py-1 bg-light">
+  <div class="container-fluid w-100">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <div class="col">
+        <div class="card shadow-sm">
+          <img src="/static/wallpapers/pexels-pixabay.jpg" class="d-block w-100 m-0" alt="Nature" />
+          <div class="card-body">
+            <p class="card-text">Nature</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary"><a href=" nature " class="text-decoration-none"> View </a></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card shadow-sm">
+          <img src="/static/wallpapers/space.jpg" class="d-block w-100 m-0" alt="Space" />
+          <div class="card-body">
+            <p class="card-text">Space</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary"><a href=" space " class="text-decoration-none"> View </a></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card shadow-sm">
+          <img src="/static/wallpapers/Eiffel-Tower.jpg" class="d-block w-100 m-0" alt="Eiffel-Tower" />
+          <div class="card-body">
+            <p class="card-text">Country</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary"><a href=" country " class="text-decoration-none"> View </a></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card shadow-sm">
+          <img src="/static/wallpapers/walking cat.jpg" class="d-block w-100 m-0" alt="walking cat" />
+          <div class="card-body">
+            <p class="card-text">Animals</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary"><a href=" animal " class="text-decoration-none"> View </a></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card shadow-sm">
+          <img src="/static/wallpapers/Taj-Mahal.jpg" class="d-block w-100 m-0" alt="Taj-Mahal" />
+          <div class="card-body">
+            <p class="card-text">Taj-mahal</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary"><a href=" tajmahal " class="text-decoration-none"> View </a></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card shadow-sm">
+          <img src="/static/wallpapers/car.jpg" class="d-block w-100 m-0" alt="Cars" />
+          <div class="card-body">
+            <p class="card-text">Cars</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary"><a href=" car " class="text-decoration-none"> View </a></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card shadow-sm">
+          <img src="/static/wallpapers/Spring-Meadow.jpg" class="d-block w-100 m-0" alt="Spring-Meadow" />
+          <div class="card-body">
+            <p class="card-text">Flowers</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary"><a href=" flower " class="text-decoration-none"> View </a></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card shadow-sm">
+          <img src="/static/wallpapers/windows.jpg" class="d-block w-100 m-0" alt="windows" />
+          <div class="card-body">
+            <p class="card-text">Windows</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary"><a href=" windows " class="text-decoration-none"> View </a></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card shadow-sm">
+          <img src="/static/wallpapers/micky-mouse.jpg" class="d-block w-100 m-0" alt="micky-mouse" />
+          <div class="card-body">
+            <p class="card-text">Cartoons</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary"><a href=" cartoon " class="text-decoration-none"> View </a></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock body %}
