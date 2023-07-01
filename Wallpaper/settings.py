@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app.apps.AppConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -146,3 +147,7 @@ SESSION_ENGINE = "django.contrib.sessions.backends.db"
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
 
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': ('rest_framework.renderers.JSONRenderer',)
+}

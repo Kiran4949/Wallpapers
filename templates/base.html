@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
@@ -17,16 +17,7 @@
     <!--sidebar-->
     <link rel="stylesheet" href="/static/css/sidebar/style.css">
     <!-- Boxiocns CDN Link -->
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>    
-    <style>
-      footer {
-        text-align: center;
-        padding: 3px;
-        background: #11101d;
-        color: white;
-        width: 100%;
-      }
-    </style>
+    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>  
   </head>
   <body>
     <div class="sidebar close">
@@ -127,7 +118,7 @@
       </li>
           <hr>
       {% endif %}
-      <!--footer-->
+      <!--start footer-->
         <li>
           <div class="profile-details">
             <div class="profile-content">
@@ -137,6 +128,7 @@
           </div>
           </div>
         </li>
+      <!--end footer-->
       </ul>
     </div>
     <!-- From Here starts body section -->
@@ -145,9 +137,9 @@
         <nav class="nav">
           {% if request.user.is_authenticated %}
           {% else %}
-          <li class="h2 end-0 top-1 nav-item dropdown-left">
-            <a href="login" class="btn btn-blue-magenta border border-primary text-primary">  SIGN IN </a>
-          </li>
+          <li class="h2 end-0 top-1 nav-item">
+            <a href="login" class="btn btn-blue-magenta border border-lavender text-primary">  SIGN IN </a>
+          </li>          
           {% endif %}
         </nav>
       </div>                                               
@@ -163,16 +155,12 @@
       {% endfor %}
       {% endif %}
 
-
       {% block body %}{% endblock body %}
-
 
     <script type="text/javascript" src="/static/css/sidebar/script.js"></script>
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
-
-    
   </body>
 </html>
 
