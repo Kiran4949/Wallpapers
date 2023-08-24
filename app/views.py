@@ -14,6 +14,11 @@ from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.encoding import force_bytes, force_str
 from . tokens import generate_token
 from django.db.models import Q
+import json
+import requests
+from .config import RECAPTCHA_SECRET_KEY
+
+
 
 # Create your views here.
 
@@ -30,65 +35,74 @@ def signup(request):
         email = request.POST['email']
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
+        # Recaptcha
+        clientkey = request.POST.get('g-recaptcha-response')
+        secretkey = RECAPTCHA_SECRET_KEY
+        captchaData = {
+            'secret': secretkey,
+            'response': clientkey
+        }
+        r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=captchaData)
+        response = json.loads(r.text)
+        verify = response['success']  
+        if verify:
+            if User.objects.filter(username=username):
+                messages.error(
+                    request, "Username already exist! Please try some other username.")
+                return redirect('home')
 
-        if User.objects.filter(username=username):
-            messages.error(
-                request, "Username already exist! Please try some other username.")
-            return redirect('home')
+            if User.objects.filter(email=email).exists():
+                messages.error(request, "Email Already Registered!!")
+                return redirect('home')
 
-        if User.objects.filter(email=email).exists():
-            messages.error(request, "Email Already Registered!!")
-            return redirect('home')
+            if len(username) > 20:
+                messages.error(request, "Username must be under 20 charcters!!")
+                return redirect('home')
 
-        if len(username) > 20:
-            messages.error(request, "Username must be under 20 charcters!!")
-            return redirect('home')
+            if pass1 != pass2:
+                messages.error(request, "Passwords didn't matched!!")
+                return redirect('home')
 
-        if pass1 != pass2:
-            messages.error(request, "Passwords didn't matched!!")
-            return redirect('home')
+            if not username.isalnum():
+                messages.error(request, "Username must be Alpha-Numeric!!")
+                return redirect('home')
 
-        if not username.isalnum():
-            messages.error(request, "Username must be Alpha-Numeric!!")
-            return redirect('home')
+            myuser = User.objects.create_user(username, email, pass1)
+            myuser.first_name = fname
+            myuser.last_name = lname
+            myuser.is_active = False
+            myuser.save()
+            messages.success(
+                request, "Your Account has been created successfully!! Please check your email to confirm your email address in order to activate your account.")
 
-        myuser = User.objects.create_user(username, email, pass1)
-        myuser.first_name = fname
-        myuser.last_name = lname
-        # myuser.is_active = False
-        myuser.is_active = False
-        myuser.save()
-        messages.success(
-            request, "Your Account has been created successfully!! Please check your email to confirm your email address in order to activate your account.")
+            # Welcome Email  ( Its an 1st mail )
+            subject = "Welcome to WALLPAPERs!!"
+            message = "Hello " + myuser.first_name + "!!\n" + \
+                "Welcome to WALLPAPERs!!\nThank you for visiting our website.\nWe have also sent you a confirmation email, please confirm your email address.\nThank You,\nTeam WALLPAPERs"
+            from_email = settings.EMAIL_HOST_USER
+            to_list = [myuser.email]
+            send_mail(subject, message, from_email, to_list, fail_silently=True)
 
-        # Welcome Email  ( Its an 1st mail )
-        subject = "Welcome to WALLPAPERs!!"
-        message = "Hello " + myuser.first_name + "!!\n" + \
-            "Welcome to WALLPAPERs!!\nThank you for visiting our website.\nWe have also sent you a confirmation email, please confirm your email address.\nThank You,\nTeam WALLPAPERs"
-        from_email = settings.EMAIL_HOST_USER
-        to_list = [myuser.email]
-        send_mail(subject, message, from_email, to_list, fail_silently=True)
+            # Email Address Confirmation Email   ( Its an 2nd mail )
+            current_site = get_current_site(request)
+            email_subject = "Confirm your Email @ WALLPAPERs - Login!!"
+            message2 = render_to_string('email_confirmation.html', {
 
-        # Email Address Confirmation Email   ( Its an 2nd mail )
-        current_site = get_current_site(request)
-        email_subject = "Confirm your Email @ WALLPAPERs - Login!!"
-        message2 = render_to_string('email_confirmation.html', {
+                'name': myuser.first_name,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(myuser.pk)),
+                'token': generate_token.make_token(myuser)
+            })
+            email = EmailMessage(
+                email_subject,
+                message2,
+                settings.EMAIL_HOST_USER,
+                [myuser.email],
+            )
+            email.fail_silently = True
+            email.send()
 
-            'name': myuser.first_name,
-            'domain': current_site.domain,
-            'uid': urlsafe_base64_encode(force_bytes(myuser.pk)),
-            'token': generate_token.make_token(myuser)
-        })
-        email = EmailMessage(
-            email_subject,
-            message2,
-            settings.EMAIL_HOST_USER,
-            [myuser.email],
-        )
-        email.fail_silently = True
-        email.send()
-
-        return redirect('login')
+            return redirect('login')
 
     return render(request, "signup.html")
 
@@ -102,7 +116,6 @@ def activate(request, uidb64, token):
 
     if myuser is not None and generate_token.check_token(myuser, token):
         myuser.is_active = True
-        # user.profile.signup_confirmation = True
         myuser.save()
         login(request, myuser)
         messages.success(request, "Your Account has been activated!!")
@@ -111,27 +124,34 @@ def activate(request, uidb64, token):
         return render(request, 'activation_failed.html')
 
 
+
 def loginUser(request):
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
         print(username, password)
-
-        # checks if user has entered correct credentials.
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            # A backend authenticated the credentials
-            login(request, user)
-            return redirect("/")
-        else:
-            # No backend authenticated the credentials
-            return render(request, 'login.html')
+        # Recaptcha
+        clientkey = request.POST.get('g-recaptcha-response')
+        secretkey = RECAPTCHA_SECRET_KEY
+        captchaData = {
+            'secret': secretkey,
+            'response': clientkey
+        }
+        r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=captchaData)
+        response = json.loads(r.text)
+        verify = response['success']  
+        if verify:
+            # Check if user has entered correct credentials.
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                # A backend authenticated the credentials
+                login(request, user)
+                return redirect("/")
+            else:
+                # No backend authenticated the credentials
+                return render(request, 'login.html', {'error_message': 'Invalid username or password'})
 
     return render(request, 'login.html')
-
-
-def about(request):
-    return render(request, 'about.html')
 
 
 def contact(request):
@@ -139,12 +159,29 @@ def contact(request):
         name = request.POST.get('name')
         email = request.POST.get('email')
         desc = request.POST.get('desc')
-        contact = Contact(name=name, email=email,
-                          desc=desc, date=datetime.today())
-        contact.save()
-        messages.success(request, 'Your message has been sent!')
+        # Recaptcha
+        clientkey = request.POST.get('g-recaptcha-response')
+        secretkey = RECAPTCHA_SECRET_KEY
+        captchaData = {
+            'secret': secretkey,
+            'response': clientkey
+        }
+        r = requests.post('https://www.google.com/recaptcha/api/siteverify', data=captchaData)
+        response = json.loads(r.text)
+        verify = response.get('success', False)
+        if verify:
+            contact = Contact(name=name, email=email, desc=desc, date=datetime.today())
+            contact.save()
+            messages.success(request, 'Your message has been sent!')
+        else:
+            messages.error(request, 'reCAPTCHA verification failed. Please try again.')
 
     return render(request, 'contact.html')
+
+
+
+def about(request):
+    return render(request, 'about.html')
 
 
 class WallpaperDetailView(View):
@@ -225,9 +262,15 @@ class Mobile(View):
 
 
 def search(request):
-    query = request.GET['search']
-    wallpaper = Wallpaper.objects.filter(Q(brand__icontains=query))
+    query = request.GET.get('search', '')  
+    # Create Q objects for searching different fields
+    brand_q = Q(brand__icontains=query)
+    title_q = Q(title__icontains=query)
+    category_q = Q(category__icontains=query)
+    resolution_q = Q(resolution__icontains=query)
+    # Combine the Q objects using the OR operator
+    combined_q = brand_q | title_q | category_q | resolution_q
+    wallpaper = Wallpaper.objects.filter(combined_q)
 
     return render(request, 'search.html', {'wallpaper': wallpaper})
-
 

@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 from .info import *
 import os
+from .config2 import *
 from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'app.apps.AppConfig',
+    'captcha',
     'rest_framework',
 ]
 
@@ -130,6 +132,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Added Manually 
+
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
@@ -137,16 +140,22 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR /'media'     
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
+
+# Email
 EMAIL_USE_TLS = EMAIL_USE_TLS
 EMAIL_HOST = EMAIL_HOST
 EMAIL_HOST_USER = EMAIL_HOST_USER
 EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
 EMAIL_PORT = EMAIL_PORT
 
+# Recaptcha
+RECAPTCHA_PUBLIC_KEY= RECAPTCHA_PUBLIC_KEY    
+RECAPTCHA_PRIVATE_KEY= RECAPTCHA_PRIVATE_KEY   
+
+
+# session engine: it allows you to securely manage and store user-specific data
 SESSION_ENGINE = "django.contrib.sessions.backends.db"  
-
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
-
 
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': ('rest_framework.renderers.JSONRenderer',)

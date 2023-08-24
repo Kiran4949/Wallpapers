@@ -6,7 +6,7 @@ from app.models import Contact, Wallpaper
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'password')
+        fields = ('id', 'username', 'email')
 
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:

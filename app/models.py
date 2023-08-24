@@ -2,7 +2,6 @@ from django.db import models
 from statistics import mode
 from django.contrib.auth.models import User
 
-
 # Create your models here.
 
 class Contact(models.Model):
@@ -34,6 +33,7 @@ class Wallpaper(models.Model):
     category = models.CharField(choices=CATEGORY_CHOICE, max_length=5, default=CATEGORY_CHOICE)
     brand = models.CharField(max_length=255, default='New')
     wallpaper_image = models.ImageField(upload_to='wallpaperimg')
+    resolution = models.CharField(max_length=255, default='1366x768')
     date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

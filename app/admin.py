@@ -12,4 +12,4 @@ admin.site.register(Contact)
 
 @admin.register(Wallpaper)
 class WallpaperModelAdmin(admin.ModelAdmin):
-    list_display = ['id', 'title', 'category', 'brand', 'wallpaper_image', 'date']
+    list_display = ['id', 'title', 'category', 'brand', 'wallpaper_image', 'resolution', 'date']

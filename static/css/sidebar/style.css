@@ -269,7 +269,7 @@
 .home-section .home-content .nav{
   background: #1d1b31;
   position:fixed;  
-  z-index:100; /*Add this */
+  z-index:100;
   width:100%;     
   height:70px;
   padding: 15px;
@@ -341,8 +341,6 @@
     width: calc(100% - 78px);
   }
 }
-
-
 /* search bar */
 .btn-default{
   background: orange;
@@ -350,11 +348,26 @@
   padding: 12.5px;
   border: 1px solid black;
 }
-
-footer {
+footer{
   text-align: center;
   padding: 3px;
   background: #11101d;
   color: white;
   width: 100%;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
