@@ -5,7 +5,7 @@
 {% block body %}
 
 <div class="container mt-3 mb-5">
-  <form action="/search">
+  <form action="{% url 'search' %}">
     <div class="input-group">
       <input type="text" class="form-control" placeholder="Search" name="search" />
       <div class="input-group-btn">
@@ -73,7 +73,7 @@
             <p class="card-text">Nature</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <a href=" nature " class="btn btn-sm btn-outline-primary btn-rounded text-decoration-none"> View </a>
+                <a href=" {% url 'nature' %} " class="btn btn-sm btn-outline-primary btn-rounded text-decoration-none"> View </a>
               </div>
             </div>
           </div>
@@ -87,7 +87,7 @@
             <p class="card-text">Space</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <a href=" space " class="btn btn-sm btn-outline-primary btn-rounded text-decoration-none"> View </a>
+                <a href=" {% url 'space' %} " class="btn btn-sm btn-outline-primary btn-rounded text-decoration-none"> View </a>
               </div>
             </div>
           </div>
@@ -101,7 +101,7 @@
             <p class="card-text">Country</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <a href=" country " class="btn btn-sm btn-outline-primary btn-rounded text-decoration-none"> View </a>
+                <a href=" {% url 'country' %} " class="btn btn-sm btn-outline-primary btn-rounded text-decoration-none"> View </a>
               </div>
             </div>
           </div>
@@ -115,7 +115,7 @@
             <p class="card-text">Animals</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <a href=" animal " class="btn btn-sm btn-outline-primary btn-rounded text-decoration-none"> View </a>
+                <a href=" {% url 'animal' %} " class="btn btn-sm btn-outline-primary btn-rounded text-decoration-none"> View </a>
               </div>
             </div>
           </div>
@@ -129,7 +129,7 @@
             <p class="card-text">Taj-mahal</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <a href=" tajmahal " class="btn btn-sm btn-outline-primary btn-rounded text-decoration-none"> View </a>
+                <a href=" {% url 'tajmahal' %} " class="btn btn-sm btn-outline-primary btn-rounded text-decoration-none"> View </a>
               </div>
             </div>
           </div>
@@ -143,7 +143,7 @@
             <p class="card-text">Cars</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <a href=" car " class="btn btn-sm btn-outline-primary btn-rounded text-decoration-none"> View </a>
+                <a href=" {% url 'car' %} " class="btn btn-sm btn-outline-primary btn-rounded text-decoration-none"> View </a>
               </div>
             </div>
           </div>
@@ -157,7 +157,7 @@
             <p class="card-text">Flowers</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <a href=" flower " class="btn btn-sm btn-outline-primary btn-rounded text-decoration-none"> View </a>
+                <a href=" {% url 'flower' %} " class="btn btn-sm btn-outline-primary btn-rounded text-decoration-none"> View </a>
               </div>
             </div>
           </div>
@@ -171,7 +171,7 @@
             <p class="card-text">Windows</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <a href=" windows " class="btn btn-sm btn-outline-primary btn-rounded text-decoration-none"> View </a>
+                <a href=" {% url 'windows' %} " class="btn btn-sm btn-outline-primary btn-rounded text-decoration-none"> View </a>
               </div>
             </div>
           </div>
@@ -185,7 +185,7 @@
             <p class="card-text">Cartoons</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <a href=" cartoon " class="btn btn-sm btn-outline-primary btn-rounded text-decoration-none"> View </a>
+                <a href=" {% url 'cartoon' %} " class="btn btn-sm btn-outline-primary btn-rounded text-decoration-none"> View </a>
               </div>
             </div>
           </div>

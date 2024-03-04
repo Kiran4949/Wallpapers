@@ -13,7 +13,25 @@
       <h2>Title: {{wallpaper.title}}</h2>
       <hr />
       <p> {{wallpaper.resolution}}</p>
+      {% if request.user.is_authenticated %}
       <a href="{{wallpaper.wallpaper_image.url}}" class="btn btn-outline-secondary shadow px-5 py-2 ms-1" download>Download</a>
+
+      <div class="alert alert-success mt-3">
+        Welcome back, {{ request.user.username }}! Explore and enjoy our exclusive features. 
+        <br>
+        <small>Customize your experience, save favorite wallpapers, and stay updated with new releases.</small>
+      </div>
+
+      {% else %}
+      <div class="alert alert-info mt-3">
+        To download this wallpaper, <a href="{% url 'signup' %}" class="alert-link">sign up now</a>.
+        <br>
+        <small>Join our community to customize your experience, save favorite wallpapers, and get updates on new releases.</small>
+      </div>
+      {% endif %}
+      <p> Also download <a href="{% url 'nature' %}" class="text-decoration-none"> Nature </a> <a href="{% url 'space' %}" class="text-decoration-none"> Space </a> <a href="{% url 'country' %}" class="text-decoration-none"> Country </a> <a href="{% url 'animal' %}" class="text-decoration-none"> Animals </a> <a href="{% url 'tajmahal' %}" class="text-decoration-none"> Tajmahal </a> 
+        <a href="{% url 'car' %}" class="text-decoration-none"> Cars </a> <a href="{% url 'flower' %}" class="text-decoration-none"> Flowers </a> <a href="{% url 'windows' %}" class="text-decoration-none"> Windows </a> <a href="{% url 'cartoon' %}" class="text-decoration-none"> Cartoons </a> <a href="{% url 'mobile' %}" class="text-decoration-none"> Mobile </a>
+      </p> 
     </div>
   </div>
 </div>

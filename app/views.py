@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from django.http import HttpResponse
 from datetime import datetime
 from app.models import Contact
 from django.views import View
@@ -19,8 +20,6 @@ import requests
 from .config import RECAPTCHA_SECRET_KEY
 
 
-
-# Create your views here.
 
 
 def index(request):
@@ -179,7 +178,6 @@ def contact(request):
     return render(request, 'contact.html')
 
 
-
 def about(request):
     return render(request, 'about.html')
 
@@ -273,4 +271,63 @@ def search(request):
     wallpaper = Wallpaper.objects.filter(combined_q)
 
     return render(request, 'search.html', {'wallpaper': wallpaper})
+    
+
+def dynamic_category(request, category):
+    # Implement your logic to handle different categories here
+    if category == 'nature':
+        natures = Wallpaper.objects.filter(category='N')
+        return render(request, 'nature.html', {'natures': natures})
+    
+    elif category == 'space':
+        spaces = Wallpaper.objects.filter(category='S')
+        return render(request, 'space.html', {'spaces': spaces})
+    
+    elif category == 'country':
+        countrys = Wallpaper.objects.filter(category='CO')
+        return render(request, 'country.html', {'countrys': countrys})
+    
+    elif category == 'animal':
+        animals = Wallpaper.objects.filter(category='A')
+        return render(request, 'animal.html', {'animals': animals})
+    
+    elif category == 'tajmahal':
+        tajmahals = Wallpaper.objects.filter(category='T')
+        return render(request, 'tajmahal.html', {'tajmahals': tajmahals})
+    
+    elif category == 'car':
+        cars = Wallpaper.objects.filter(category='C')
+        return render(request, 'car.html', {'cars': cars})
+
+    elif category == 'flower':
+        flowers = Wallpaper.objects.filter(category='F')
+        return render(request, 'flowers.html', {'flowers': flowers})
+    
+    elif category == 'windows':
+        windows = Wallpaper.objects.filter(category='W')
+        return render(request, 'windows.html', {'windows': windows})
+
+    elif category == 'cartoon':
+        cartoons = Wallpaper.objects.filter(category='CA')
+        return render(request, 'cartoons.html', {'cartoons': cartoons})
+    
+    elif category == 'mobile':
+        mobiles = Wallpaper.objects.filter(category='M')
+        return render(request, 'mobile.html', {'mobiles': mobiles})
+    
+    elif category == 'search':
+        query = request.GET.get('search', '')  
+        # Create Q objects for searching different fields
+        brand_q = Q(brand__icontains=query)
+        title_q = Q(title__icontains=query)
+        category_q = Q(category__icontains=query)
+        resolution_q = Q(resolution__icontains=query)
+        # Combine the Q objects using the OR operator
+        combined_q = brand_q | title_q | category_q | resolution_q
+        wallpaper = Wallpaper.objects.filter(combined_q)
+
+        return render(request, 'search.html', {'wallpaper': wallpaper})
+
+    else:
+        return HttpResponse('Invalid category.')
 

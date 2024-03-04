@@ -12,9 +12,11 @@
         <a href="{% url 'wallpaper-detail' a.id %}" class="btn">
           <img src="{{a.wallpaper_image.url}}" class="card-img-top w-100 m-0" height="300px" />
         </a>
+        {% if request.user.is_authenticated %}
         <div class="card-footer">
           <small class="text-center"><a href=" {{a.wallpaper_image.url}} " class="btn" download> Download </a></small>
         </div>
+        {% endif %}
       </div>
     </div>
     {% endfor %}

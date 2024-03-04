@@ -5,19 +5,20 @@
   padding: 0;
   box-sizing: border-box;
   font-family: 'Poppins', sans-serif;
+  overflow-x: visible;
 }
 .sidebar{
   position: fixed;
   top: 0;
   left: 0;
   height: 100%;
-  width: 260px;
+  width: 200px;
   background: #1d1b31; 
   z-index: 100;
   transition: all 0.5s ease;
 }
 .sidebar.close{
-  width: 78px;
+  width: 68px;
 }
 .sidebar .logo-details{
   height: 60px;
@@ -29,16 +30,16 @@
   font-size: 30px;
   color: #fff;
   height: 50px;
-  min-width: 78px;
+  min-width: 68px;
   text-align: center;
   line-height: 50px;
 }
 .sidebar .logo-details .logo_name{
-  font-size: 22px;
+  font-size: 18px;
   color: #fff;
   font-weight: 600;
   transition: 0.3s ease;
-  transition-delay: 0.1s;
+  transition-delay: 0.3s;
 }
 .sidebar.close .logo-details .logo_name{
   transition-delay: 0s;
@@ -74,7 +75,7 @@
 }
 .sidebar .nav-links li i{
   height: 50px;
-  min-width: 78px;
+  min-width: 68px;
   text-align: center;
   line-height: 50px;
   color: #fff;
@@ -167,11 +168,11 @@
   height: 42px;
   width: 42px;
   object-fit: cover;
-  border-radius: 12px;
+  border-radius: 22px;
   background: #1d1b31;
   transition: all 0.5s ease;
   padding: 1px;
-  margin-left: 110px;
+  margin-left: 80px;
   background: blue;
 }
 .sidebar.close .img{
@@ -180,7 +181,7 @@
 }
 .sidebar .h1{
   font-size: 12px;
-  color: gray;
+  color: white;
   transition: all 0.4s ease;
   text-align: center;
 }
@@ -192,7 +193,7 @@
   position: fixed;
   justify-content: space-between;  
   bottom: 0;
-  width: 260px;
+  width: 200px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -204,7 +205,7 @@
   background: none;
 }
 .sidebar.close .profile-details{
-  width: 78px;
+  width: 68px;
 }
 .sidebar .profile-details .profile-content{
   display: flex;
@@ -251,16 +252,16 @@
   text-align: center;
 }
 .home-section{
-  position: relative;
+  position: absolute;
   background: white;
   height: 100vh;
-  left: 260px;
-  width: calc(100% - 260px);
+  left: 70px;
+  width: calc(100% - 70px);
   transition: all 0.5s ease;
 }
 .sidebar.close ~ .home-section{
-  left: 78px;
-  width: calc(100% - 78px);
+  left: 68px;
+  width: calc(100% - 68px);
 }
 .home-content{
   display: flex;
@@ -269,7 +270,7 @@
 .home-section .home-content .nav{
   background: #1d1b31;
   position:fixed;  
-  z-index:100;
+  z-index:10;
   width:100%;     
   height:70px;
   padding: 15px;
@@ -289,6 +290,9 @@
   text-decoration: none;
   font-size: 35px;
 }
+
+      /* Media Queries */
+
 @media screen and (max-width: 480px){
   .home-section .home-content .nav .h2{
     margin-right: 10px;
@@ -316,12 +320,16 @@
   font-size: 26px;
   font-weight: 600;
 }
+
 @media screen and (max-width: 400px){
   .sidebar{
     width: 240px;
   }
   .sidebar.close{
-    width: 78px;
+    width: 68px;
+  }
+  .sidebar .img {
+    margin-left: 100px;
   }
   .sidebar .profile-details{
     width: 240px;
@@ -330,17 +338,18 @@
     background: none;
   }
   .sidebar.close .profile-details{
-    width: 78px;
+    width: 68px;
   }
   .home-section{
-    left: 240px;
-    width: calc(100% - 240px);
+    left: 80px;
+    width: calc(100% - 80px);
   }
   .sidebar.close ~ .home-section{
-    left: 78px;
-    width: calc(100% - 78px);
+    left: 68px;
+    width: calc(100% - 68px);
   }
 }
+
 /* search bar */
 .btn-default{
   background: orange;
@@ -348,6 +357,7 @@
   padding: 12.5px;
   border: 1px solid black;
 }
+
 footer{
   text-align: center;
   padding: 3px;
@@ -355,19 +365,3 @@ footer{
   color: white;
   width: 100%;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

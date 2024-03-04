@@ -17,54 +17,53 @@
             </div>
             <ul class="sub-menu">
                 <li><a class="link_name">Category</a></li>
-                <li><a href="nature">Nature</a></li>
-                <li><a href="space">Space</a></li>
-                <li><a href="country">Country</a></li>
-                <li><a href="animal">Animals</a></li>
-                <li><a href="tajmahal">Taj-Mahal</a></li>
-                <li><a href="car">Cars</a></li>
-                <li><a href="flower">Flowers</a></li>
-                <li><a href="windows">Windows</a></li>
-                <li><a href="cartoon">Cartoons</a></li>
+                <li><a href="{% url 'nature' %}">Nature</a></li>
+                <li><a href="{% url 'space' %}">Space</a></li>
+                <li><a href="{% url 'country' %}">Country</a></li>
+                <li><a href="{% url 'animal' %}">Animals</a></li>
+                <li><a href="{% url 'tajmahal' %}">Taj-Mahal</a></li>
+                <li><a href="{% url 'car' %}">Cars</a></li>
+                <li><a href="{% url 'flower' %}">Flowers</a></li>
+                <li><a href="{% url 'windows' %}">Windows</a></li>
+                <li><a href="{% url 'cartoon' %}">Cartoons</a></li>
             </ul>
         </li>
         <li>
-            <a href="mobile"><i class="bx bx-mobile-alt"></i><span class="link_name">Mobile</span></a>
+            <a href="{% url "mobile" %}"><i class="bx bx-mobile-alt"></i><span class="link_name">Mobile</span></a>
             <ul class="sub-menu blank">
-                <li><a class="link_name" href="mobile">Mobile</a></li>
+                <li><a class="link_name" href="{% url "mobile" %}">Mobile</a></li>
             </ul>
         </li>
         <li>
-            <a href="signup"><i class="bx bx-user-plus"></i><span class="link_name">Signup</span></a>
+            <a href="{% url "signup" %}"><i class="bx bx-user-plus"></i><span class="link_name">Signup</span></a>
             <ul class="sub-menu blank">
-                <li><a class="link_name" href="signup">Sign Up</a></li>
+                <li><a class="link_name" href="{% url "signup" %}">Sign Up</a></li>
             </ul>
         </li>
         <li>
-            <a href="login"><i class="bx bxs-user"></i><span class="link_name">Signin</span></a>
+            <a href="{% url "login" %}"><i class="bx bxs-user"></i><span class="link_name">Signin</span></a>
             <ul class="sub-menu blank">
-                <li><a class="link_name" href="login">Sign In</a></li>
+                <li><a class="link_name" href="{% url "login" %}">Sign In</a></li>
             </ul>
         </li>
         <li>
-            <a href="about"><i class="bx bx-group"></i><span class="link_name">About</span></a>
+            <a href="{% url "about" %}"><i class="bx bx-group"></i><span class="link_name">About</span></a>
             <ul class="sub-menu blank">
-                <li><a class="link_name" href="about">About</a></li>
+                <li><a class="link_name" href="{% url "about" %}">About</a></li>
             </ul>
         </li>
         <li>
-            <a href="contact"><i class="bx bx-phone"></i><span class="link_name">Contact</span></a>
+            <a href="{% url "contact" %}"><i class="bx bx-phone"></i><span class="link_name">Contact</span></a>
             <ul class="sub-menu blank">
-                <li><a class="link_name" href="contact">Contact</a></li>
+                <li><a class="link_name" href="{% url "contact" %}">Contact</a></li>
             </ul>
         </li>
         <li>
             {% if request.user.is_authenticated %}
             <hr />
         </li>
-
         <li>
-            <a href="/"><img class="img" src="/static/images/sidebar-image/profile.jpg" /></a>
+            <a href="/"><img class="img" src="/static/images/profile/profile.png" /></a>
             <h1 class="h1">{{request.user.username | capfirst}}</h1>
             <h1 class="h1">{{request.user.email}}</h1>
             <a href="logout"><i class="bx bx-log-out"></i><span class="link_name">Signout</span></a>
@@ -78,7 +77,7 @@
             <div class="profile-details">
                 <div class="profile-content"></div>
                 <div class="name-job">
-                    <div class="job">&copy; 2022 WALLPAPERs</div>
+                    <div class="job">&copy; 2024 WALLPAPERs</div>
                 </div>
             </div>
         </li>
@@ -92,8 +91,8 @@
         {% if request.user.is_authenticated %} {% else %}
         <li class="h2 end-0 top-1 nav-item">
             <a
-            href="login"
-            class="btn btn-blue-magenta border border-lavender text-primary"
+            href="{% url "login" %}"
+            class="btn btn-blue-magenta border border-lavender text-white"
             >
             SIGN IN
             </a>
@@ -103,4 +102,4 @@
     </div>
     <br/>
     <br/>
-    <br/>
+    <br/> 
