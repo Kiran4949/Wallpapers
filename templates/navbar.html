@@ -66,9 +66,9 @@
             <a href="/"><img class="img" src="/static/images/profile/profile.png" /></a>
             <h1 class="h1">{{request.user.username | capfirst}}</h1>
             <h1 class="h1">{{request.user.email}}</h1>
-            <a href="logout"><i class="bx bx-log-out"></i><span class="link_name">Signout</span></a>
+            <a href="{% url "logout" %}"><i class="bx bx-log-out"></i><span class="link_name">Signout</span></a>
             <ul class="sub-menu blank">
-                <li><a class="link_name" href="logout">Sign Out</a></li>
+                <li><a class="link_name" href="{% url "logout" %}">Sign Out</a></li>
             </ul>
         </li>
             {% endif %}
