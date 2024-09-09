@@ -12,8 +12,11 @@
         </li>
         <li>
             <div class="iocn-link">
-                <a href="#"><i class="bx bx-collection"></i><span class="link_name">Category</span></a>
-                <i class="bx bxs-chevron-down arrow"></i>
+                <a href="javascript:void(0);" class="category-link">
+                    <i class="bx bx-collection"></i>
+                    <span class="link_name">Category</span>
+                </a>
+                <i class="bx bxs-chevron-down arrow category-link"></i>
             </div>
             <ul class="sub-menu">
                 <li><a class="link_name">Category</a></li>
@@ -90,12 +93,7 @@
         <nav class="nav">
         {% if request.user.is_authenticated %} {% else %}
         <li class="h2 end-0 top-1 nav-item">
-            <a
-            href="{% url "login" %}"
-            class="btn btn-blue-magenta border border-lavender text-white"
-            >
-            SIGN IN
-            </a>
+            <a href="{% url "login" %}" class="btn btn-blue-magenta border border-lavender text-white"> SIGN IN </a>
         </li>
         {% endif %}
         </nav>

@@ -1,14 +1,26 @@
 let arrow = document.querySelectorAll(".arrow");
-for (var i = 0; i < arrow.length; i++) {
-  arrow[i].addEventListener("click", (e)=>{
- let arrowParent = e.target.parentElement.parentElement;//selecting main parent of arrow
- arrowParent.classList.toggle("showMenu");
-  });
+let categoryLinks = document.querySelectorAll(".category-link");
+
+// Function to toggle the dropdown menu
+function toggleMenu(e) {
+  let arrowParent = e.target.closest("li");
+  arrowParent.classList.toggle("showMenu");
 }
 
+// Add click event listener to the chevron icon
+for (var i = 0; i < arrow.length; i++) {
+  arrow[i].addEventListener("click", toggleMenu);
+}
+
+// Add click event listener to the "Category" link
+for (var i = 0; i < categoryLinks.length; i++) {
+  categoryLinks[i].addEventListener("click", toggleMenu);
+}
+
+// Sidebar toggle functionality
 let sidebar = document.querySelector(".sidebar");
 let sidebarBtn = document.querySelector(".bx-menu");
-console.log(sidebarBtn);
-sidebarBtn.addEventListener("click", ()=>{
+
+sidebarBtn.addEventListener("click", () => {
   sidebar.classList.toggle("close");
 });

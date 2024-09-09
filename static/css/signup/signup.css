@@ -12,6 +12,10 @@ img{
 	margin-top: 70px; 
 	translate: transform(-50, -50);
 }
+img:active {
+	transform: translateY(2px);
+	transition: all 0.2s ease;
+}
 h5{
 	color: black; 
 	margin-left: 42%;
